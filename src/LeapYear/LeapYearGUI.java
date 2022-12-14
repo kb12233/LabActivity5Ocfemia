@@ -50,11 +50,15 @@ public class LeapYearGUI extends JFrame {
     }
 
     public void checkYear() {
-        int year = Integer.parseInt(tfYear.getText());
-        if (((year % 4 == 0) && (year % 100 != 0)) || (year%400 == 0)) {
-            JOptionPane.showMessageDialog(panel1, "Leap year");
-        } else {
-            JOptionPane.showMessageDialog(panel1, "Not a leap year");
+        try {
+            int year = Integer.parseInt(tfYear.getText());
+            if (((year % 4 == 0) && (year % 100 != 0)) || (year%400 == 0)) {
+                JOptionPane.showMessageDialog(panel1, "Leap year");
+            } else {
+                JOptionPane.showMessageDialog(panel1, "Not a leap year");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(panel1, e.toString());
         }
     }
 }
