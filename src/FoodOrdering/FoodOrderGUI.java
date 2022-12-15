@@ -2,7 +2,7 @@ package FoodOrdering;
 
 import javax.swing.*;
 
-public class FoodOrderGUI {
+public class FoodOrderGUI extends JFrame {
     private JPanel panel1;
 
     //CHECKBOXES
@@ -21,4 +21,13 @@ public class FoodOrderGUI {
 
     //BUTTON
     private JButton btnOrder;
+
+    public static void main(String[] args) {
+        FoodOrderGUI app = new FoodOrderGUI();
+        app.setTitle("Food Ordering System");
+        app.setContentPane(app.panel1);
+        app.setSize(500, 500);
+        app.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        app.setVisible(true);
+    }
 }
