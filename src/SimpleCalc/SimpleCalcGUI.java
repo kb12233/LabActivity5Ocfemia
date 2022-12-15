@@ -91,23 +91,27 @@ public class SimpleCalcGUI extends JFrame {
     }
 
     public void compute() {
-        int num1 = Integer.parseInt(tfNumber1.getText());
-        int num2 = Integer.parseInt(tfNumber2.getText());
-        int result = 0;
-        switch (cbOperations.getSelectedItem().toString()) {
-            case "+":
-                result = num1 + num2;
-                break;
-            case "-":
-                result = num1 - num2;
-                break;
-            case "*":
-                result = num1 * num2;
-                break;
-            case "/":
-                result = num1 / num2;
-                break;
+        try {
+            int num1 = Integer.parseInt(tfNumber1.getText());
+            int num2 = Integer.parseInt(tfNumber2.getText());
+            int result = 0;
+            switch (cbOperations.getSelectedItem().toString()) {
+                case "+":
+                    result = num1 + num2;
+                    break;
+                case "-":
+                    result = num1 - num2;
+                    break;
+                case "*":
+                    result = num1 * num2;
+                    break;
+                case "/":
+                    result = num1 / num2;
+                    break;
+            }
+            lblResult.setText(String.valueOf(result));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(panel1, e.toString());
         }
-        lblResult.setText(String.valueOf(result));
     }
 }
