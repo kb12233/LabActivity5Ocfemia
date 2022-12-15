@@ -1,7 +1,6 @@
 package FoodOrdering;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -63,78 +62,82 @@ public class FoodOrderGUI extends JFrame {
     }
 
     public void compute() {
-        double total = 0;
-        double discount = 0;
+        try {
+            double total = 0;
+            double discount = 0;
 
-        String prompt = "";
-        boolean foodIsSelected = false;
-        boolean discountIsSelected = false;
-        boolean withDiscount = false;
+            String prompt = "";
+            boolean foodIsSelected = false;
+            boolean discountIsSelected = false;
+            boolean withDiscount = false;
 
-        for (JCheckBox c : cFoods) {
-            if (c.isSelected()) {
-                foodIsSelected = true;
-                switch (c.getText()) {
-                    case "Pizza":
-                        total += 100;
-                        break;
-                    case "Burger":
-                        total += 80;
-                        break;
-                    case "Fries":
-                        total += 65;
-                        break;
-                    case "Soft Drinks":
-                        total += 55;
-                        break;
-                    case "Tea":
-                        total += 50;
-                        break;
-                    case "Sundae":
-                        total += 40;
-                        break;
+            for (JCheckBox c : cFoods) {
+                if (c.isSelected()) {
+                    foodIsSelected = true;
+                    switch (c.getText()) {
+                        case "Pizza":
+                            total += 100;
+                            break;
+                        case "Burger":
+                            total += 80;
+                            break;
+                        case "Fries":
+                            total += 65;
+                            break;
+                        case "Soft Drinks":
+                            total += 55;
+                            break;
+                        case "Tea":
+                            total += 50;
+                            break;
+                        case "Sundae":
+                            total += 40;
+                            break;
+                    }
                 }
             }
-        }
-        if (!foodIsSelected) {
-            prompt +=  "You have not selected a food from the menu.\n";
-        }
-
-        for (JRadioButton rb : rbDiscount) {
-            if (rb.isSelected()) {
-                discountIsSelected = true;
-                switch (rb.getText()) {
-                    case "None":
-                        //do nothing
-                        break;
-                    case "5% Off":
-                        discount = total * 0.05;
-                        withDiscount = true;
-                        break;
-                    case "10% Off":
-                        discount = total * 0.10;
-                        withDiscount = true;
-                        break;
-                    case "15% Off":
-                        discount = total * 0.15;
-                        withDiscount = true;
-                        break;
-                }
-                break;
+            if (!foodIsSelected) {
+                prompt +=  "You have not selected a food from the menu.\n";
             }
-        }
-        if (!discountIsSelected) {
-            prompt += "You have not selected a discount option.";
-        }
 
-        if (withDiscount) {
-            total -= discount;
-        }
+            for (JRadioButton rb : rbDiscount) {
+                if (rb.isSelected()) {
+                    discountIsSelected = true;
+                    switch (rb.getText()) {
+                        case "None":
+                            //do nothing
+                            break;
+                        case "5% Off":
+                            discount = total * 0.05;
+                            withDiscount = true;
+                            break;
+                        case "10% Off":
+                            discount = total * 0.10;
+                            withDiscount = true;
+                            break;
+                        case "15% Off":
+                            discount = total * 0.15;
+                            withDiscount = true;
+                            break;
+                    }
+                    break;
+                }
+            }
+            if (!discountIsSelected) {
+                prompt += "You have not selected a discount option.";
+            }
 
-        if (!foodIsSelected || !discountIsSelected) {
-            JOptionPane.showMessageDialog(panel1, prompt);
-        } else {
-            JOptionPane.showMessageDialog(panel1, String.format("The total price is Php %.2f", total));
+            if (withDiscount) {
+                total -= discount;
+            }
+
+            if (!foodIsSelected || !discountIsSelected) {
+                throw new Exception(prompt);
+            } else {
+                JOptionPane.showMessageDialog(panel1, String.format("The total price is Php %.2f", total));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(panel1, e.getMessage());
         }
     }
 }
